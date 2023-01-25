@@ -1,10 +1,10 @@
 object RemoteDispatcher: TRemoteDispatcher
-  Left = -8
+  Left = -2568
   Top = 0
   HorzScrollBar.Visible = False
   VertScrollBar.Visible = False
-  Caption = 'Remote Dispatcher Three'
-  ClientHeight = 1016
+  Caption = 'PSRY Remote Dispatcher'
+  ClientHeight = 1011
   ClientWidth = 7680
   Color = clBtnFace
   Constraints.MaxHeight = 1100
@@ -22,39 +22,27 @@ object RemoteDispatcher: TRemoteDispatcher
   TextHeight = 13
   object BottomPanel: TPanel
     Left = 0
-    Top = 936
+    Top = 931
     Width = 7680
     Height = 80
     Align = alBottom
     TabOrder = 0
+    ExplicitTop = 936
     object CliffLabel: TLabel
-      Left = 7088
+      Left = 7344
       Top = 21
       Width = 85
       Height = 13
       Caption = ' Signals 2, 4, 6 , 8'
       Visible = False
     end
-    object IPAddress: TMemo
-      Left = 16
-      Top = 26
-      Width = 134
-      Height = 22
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-    end
     object LASigs4: TPanel
-      Left = 2720
-      Top = 0
+      Left = 2690
+      Top = -2
       Width = 120
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 1
+      TabOrder = 0
       object Label8: TLabel
         Left = 16
         Top = 8
@@ -84,12 +72,12 @@ object RemoteDispatcher: TRemoteDispatcher
       end
     end
     object NassauDispatcher: TPanel
-      Left = 5408
+      Left = 5286
       Top = 0
       Width = 115
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 2
+      TabOrder = 1
       object rbNassau: TRadioButton
         Left = 9
         Top = 6
@@ -121,12 +109,12 @@ object RemoteDispatcher: TRemoteDispatcher
       end
     end
     object OSSLocks: TPanel
-      Left = 3256
+      Left = 3443
       Top = 0
       Width = 89
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 3
+      TabOrder = 2
       object Label9: TLabel
         Left = 8
         Top = 8
@@ -156,12 +144,12 @@ object RemoteDispatcher: TRemoteDispatcher
       end
     end
     object BankClivedenCliff: TPanel
-      Left = 6434
-      Top = 0
+      Left = 6150
+      Top = 6
       Width = 177
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 4
+      TabOrder = 3
       object rbCliff: TRadioButton
         Left = 16
         Top = 2
@@ -193,12 +181,12 @@ object RemoteDispatcher: TRemoteDispatcher
       end
     end
     object AutoRoutes: TPanel
-      Left = 6671
-      Top = 0
+      Left = 6383
+      Top = 6
       Width = 106
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 5
+      TabOrder = 4
       object rbC13Auto: TRadioButton
         Left = 0
         Top = 2
@@ -236,7 +224,7 @@ object RemoteDispatcher: TRemoteDispatcher
       Width = 82
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 6
+      TabOrder = 5
       object rbYard: TRadioButton
         Left = 0
         Top = 16
@@ -259,12 +247,12 @@ object RemoteDispatcher: TRemoteDispatcher
       end
     end
     object HydeFleetOn: TCheckBox
-      Left = 432
+      Left = 496
       Top = 32
       Width = 97
       Height = 17
       Caption = 'Hyde Fleet On'
-      TabOrder = 7
+      TabOrder = 6
       OnClick = HydeFleetOnClick
     end
     object YardFleetOn: TCheckBox
@@ -273,7 +261,7 @@ object RemoteDispatcher: TRemoteDispatcher
       Width = 97
       Height = 17
       Caption = 'YardFleetOn'
-      TabOrder = 8
+      TabOrder = 7
       OnClick = YardFleetOnClick
     end
     object PortFleetOn: TCheckBox
@@ -282,25 +270,25 @@ object RemoteDispatcher: TRemoteDispatcher
       Width = 97
       Height = 17
       Caption = 'PortFleetOn'
-      TabOrder = 9
+      TabOrder = 8
       OnClick = PortFleetOnClick
     end
     object CliffFleetOn: TCheckBox
-      Left = 7088
-      Top = 48
+      Left = 7344
+      Top = 40
       Width = 97
       Height = 17
       Caption = 'Cliff Fleet On'
-      TabOrder = 10
+      TabOrder = 9
       OnClick = CliffFleetOnClick
     end
     object HydeInRoutes: TPanel
-      Left = 543
+      Left = 582
       Top = 0
       Width = 131
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 11
+      TabOrder = 10
       object Label5: TLabel
         Left = 16
         Top = 6
@@ -330,12 +318,12 @@ object RemoteDispatcher: TRemoteDispatcher
       end
     end
     object DellShoreRoutes: TPanel
-      Left = 3659
+      Left = 3289
       Top = 0
       Width = 137
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 12
+      TabOrder = 11
       object Label10: TLabel
         Left = 8
         Top = 6
@@ -365,31 +353,50 @@ object RemoteDispatcher: TRemoteDispatcher
       end
       object H30Incl: TCheckBox
         Left = 64
-        Top = 27
+        Top = 17
         Width = 97
         Height = 17
         Caption = 'H30'
         TabOrder = 2
         OnClick = H30InclClick
       end
+      object F11Incl: TCheckBox
+        Left = 80
+        Top = 40
+        Width = 50
+        Height = 17
+        Caption = 'F11'
+        TabOrder = 3
+        OnClick = F11InclClick
+      end
+      object P32Incl: TCheckBox
+        Left = 88
+        Top = 63
+        Width = 50
+        Height = 17
+        Caption = 'P32'
+        TabOrder = 4
+        OnClick = P32InclClick
+      end
     end
     object NassauRoutes: TPanel
-      Left = 5536
+      Left = 5494
       Top = 0
-      Width = 120
+      Width = 105
       Height = 75
       BevelOuter = bvNone
-      TabOrder = 13
+      TabOrder = 12
+      Visible = False
       object Label11: TLabel
-        Left = 32
-        Top = 6
+        Left = 16
+        Top = 8
         Width = 76
         Height = 13
         Caption = 'Nassau Routing'
       end
       object NaOn: TRadioButton
-        Left = 40
-        Top = 32
+        Left = 32
+        Top = 27
         Width = 50
         Height = 17
         Caption = 'On'
@@ -397,8 +404,8 @@ object RemoteDispatcher: TRemoteDispatcher
         OnClick = NaOnClick
       end
       object NaOff: TRadioButton
-        Left = 40
-        Top = 55
+        Left = 32
+        Top = 50
         Width = 50
         Height = 17
         Caption = 'Off'
@@ -409,16 +416,17 @@ object RemoteDispatcher: TRemoteDispatcher
       end
     end
   end
-  object PanelX: TPanel
+  object MainPanel: TPanel
     Left = 0
     Top = 106
     Width = 7680
-    Height = 830
+    Height = 825
     Align = alClient
     TabOrder = 1
+    ExplicitHeight = 830
     object ImageHydeYardPort: TImage
       Left = 0
-      Top = 0
+      Top = 6
       Width = 2101
       Height = 676
       AutoSize = True
@@ -461,7 +469,7 @@ object RemoteDispatcher: TRemoteDispatcher
       WordWrap = False
     end
     object ActiveList: TListBox
-      Left = 3468
+      Left = 1029
       Top = 288
       Width = 370
       Height = 169
@@ -492,7 +500,7 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = TestBufferClick
     end
   end
-  object Panel3: TPanel
+  object TopPanel: TPanel
     Left = 0
     Top = 0
     Width = 7680
@@ -500,14 +508,14 @@ object RemoteDispatcher: TRemoteDispatcher
     Align = alTop
     TabOrder = 2
     object Label2: TLabel
-      Left = 352
-      Top = 25
+      Left = 2968
+      Top = 8
       Width = 67
       Height = 13
       Caption = 'DCC Breakers'
     end
     object Label3: TLabel
-      Left = 120
+      Left = 2672
       Top = 18
       Width = 30
       Height = 13
@@ -528,14 +536,14 @@ object RemoteDispatcher: TRemoteDispatcher
       Caption = 'Loco'
     end
     object Label6: TLabel
-      Left = 3851
+      Left = 3883
       Top = 8
       Width = 69
       Height = 13
       Caption = 'Selected Loco'
     end
     object CabSignal: TImage
-      Left = 4072
+      Left = 4077
       Top = 2
       Width = 20
       Height = 100
@@ -732,10 +740,31 @@ object RemoteDispatcher: TRemoteDispatcher
         000000000000000000000000000000000000}
       OnClick = CabSignalClick
     end
+    object Label12: TLabel
+      Left = 3687
+      Top = 8
+      Width = 94
+      Height = 13
+      Caption = 'Block   Loco     FDir'
+    end
+    object Label13: TLabel
+      Left = 4114
+      Top = 8
+      Width = 69
+      Height = 13
+      Caption = 'TTrack Speed'
+    end
+    object Label14: TLabel
+      Left = 4114
+      Top = 50
+      Width = 63
+      Height = 13
+      Caption = 'Signal Apeed'
+    end
     object Status: TEdit
-      Left = 164
-      Top = 15
-      Width = 129
+      Left = 2700
+      Top = 18
+      Width = 117
       Height = 22
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -746,7 +775,7 @@ object RemoteDispatcher: TRemoteDispatcher
       TabOrder = 1
     end
     object Connect: TButton
-      Left = 24
+      Left = 2584
       Top = 13
       Width = 73
       Height = 25
@@ -755,8 +784,8 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = ConnectClick
     end
     object Disconnect: TButton
-      Left = 24
-      Top = 53
+      Left = 2584
+      Top = 46
       Width = 75
       Height = 25
       Caption = 'Disconnect'
@@ -764,8 +793,8 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = DisconnectClick
     end
     object DCCBreakers: TEdit
-      Left = 352
-      Top = 44
+      Left = 2968
+      Top = 27
       Width = 201
       Height = 28
       Color = clGreen
@@ -793,8 +822,8 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = TrainClick
     end
     object PSTime: TEdit
-      Left = 176
-      Top = 43
+      Left = 2860
+      Top = 35
       Width = 89
       Height = 45
       Font.Charset = DEFAULT_CHARSET
@@ -807,7 +836,7 @@ object RemoteDispatcher: TRemoteDispatcher
       Text = '12:00'
     end
     object LoadIDs: TButton
-      Left = 3296
+      Left = 3297
       Top = 13
       Width = 75
       Height = 25
@@ -816,7 +845,7 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = LoadIDsClick
     end
     object SaveIDs: TButton
-      Left = 3296
+      Left = 3297
       Top = 75
       Width = 75
       Height = 25
@@ -825,7 +854,7 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = SaveIDsClick
     end
     object ClearIDs: TButton
-      Left = 3296
+      Left = 3297
       Top = 44
       Width = 75
       Height = 25
@@ -876,7 +905,7 @@ object RemoteDispatcher: TRemoteDispatcher
     end
     object KillATC: TButton
       Left = 3487
-      Top = 76
+      Top = 75
       Width = 75
       Height = 25
       Caption = 'Kill all ATC'
@@ -885,8 +914,8 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = KillATCClick
     end
     object cbActive: TCheckBox
-      Left = 3584
-      Top = 50
+      Left = 3684
+      Top = 55
       Width = 57
       Height = 28
       Caption = 'Active'
@@ -894,7 +923,7 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = cbActiveClick
     end
     object cbATC: TCheckBox
-      Left = 3639
+      Left = 3729
       Top = 55
       Width = 42
       Height = 17
@@ -903,7 +932,7 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = cbATCClick
     end
     object cbRTC: TCheckBox
-      Left = 3695
+      Left = 3785
       Top = 55
       Width = 46
       Height = 17
@@ -913,7 +942,7 @@ object RemoteDispatcher: TRemoteDispatcher
     end
     object ShowList: TButton
       Left = 3624
-      Top = 75
+      Top = 77
       Width = 75
       Height = 25
       Caption = 'Show List'
@@ -921,28 +950,28 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = ShowListClick
     end
     object SelectedTrain: TEdit
-      Left = 3776
+      Left = 3836
       Top = 27
       Width = 49
       Height = 21
       TabOrder = 16
     end
     object SelectedLoco: TEdit
-      Left = 3776
+      Left = 3836
       Top = 54
       Width = 49
       Height = 21
       TabOrder = 17
     end
     object BlockID: TEdit
-      Left = 3776
+      Left = 3836
       Top = 81
       Width = 49
       Height = 21
       TabOrder = 18
     end
     object DeleteID: TButton
-      Left = 3851
+      Left = 3751
       Top = 27
       Width = 62
       Height = 21
@@ -951,7 +980,7 @@ object RemoteDispatcher: TRemoteDispatcher
       OnClick = DeleteIDClick
     end
     object DeleteLoco: TButton
-      Left = 3851
+      Left = 3751
       Top = 54
       Width = 65
       Height = 21
@@ -959,41 +988,24 @@ object RemoteDispatcher: TRemoteDispatcher
       TabOrder = 20
       OnClick = DeleteLocoClick
     end
-    object ATCOn: TButton
-      Left = 3894
-      Top = 78
-      Width = 65
+    object OffBtn: TButton
+      Left = 3944
+      Top = 80
+      Width = 103
       Height = 22
-      Caption = 'ATC On'
+      Caption = 'Monitor/ATC Off'
+      Enabled = False
       TabOrder = 21
-      OnClick = ATCOnClick
-    end
-    object OnList: TButton
-      Left = 3944
-      Top = 26
-      Width = 75
-      Height = 22
-      Caption = 'On List'
-      TabOrder = 22
-      OnClick = OnListClick
-    end
-    object OffList: TButton
-      Left = 3944
-      Top = 54
-      Width = 75
-      Height = 21
-      Caption = 'Off List'
-      TabOrder = 23
-      OnClick = OffListClick
+      OnClick = OffBtnClick
     end
     object ATCControls: TPanel
-      Left = 4134
-      Top = -1
-      Width = 256
+      Left = 4200
+      Top = -5
+      Width = 201
       Height = 106
       Color = clCream
       ParentBackground = False
-      TabOrder = 24
+      TabOrder = 22
       Visible = False
       object Label7: TLabel
         Left = 88
@@ -1011,57 +1023,110 @@ object RemoteDispatcher: TRemoteDispatcher
         TabOrder = 0
         OnClick = StartStopBtnClick
       end
-      object DirectionBtn: TButton
-        Left = 15
-        Top = 54
-        Width = 75
-        Height = 17
-        Caption = 'Direction'
-        TabOrder = 1
-        OnClick = DirectionBtnClick
-      end
-      object SpeedBox: TEdit
-        Left = 104
-        Top = 27
-        Width = 41
-        Height = 21
-        TabOrder = 2
-      end
-      object Direction: TEdit
-        Left = 104
-        Top = 54
-        Width = 41
-        Height = 21
-        TabOrder = 3
-      end
       object HeadlightBtn: TButton
-        Left = 160
+        Left = 112
         Top = 28
         Width = 75
         Height = 21
         Caption = 'Headlight'
-        TabOrder = 4
+        TabOrder = 1
         OnClick = HeadlightBtnClick
         OnMouseDown = HeadlightBtnMouseDown
         OnMouseUp = HeadlightBtnMouseUp
       end
       object HornBtn: TButton
-        Left = 160
+        Left = 112
         Top = 55
         Width = 75
         Height = 20
         Caption = 'Horn'
-        TabOrder = 5
+        TabOrder = 2
       end
-      object ATCOffButton: TButton
-        Left = 87
-        Top = 81
-        Width = 75
-        Height = 21
-        Caption = 'ATC Off'
-        TabOrder = 6
-        OnClick = ATCOffButtonClick
+      object rbFor: TRadioButton
+        Left = 24
+        Top = 57
+        Width = 41
+        Height = 17
+        Caption = 'Forward'
+        Checked = True
+        TabOrder = 3
+        TabStop = True
       end
+      object rbRev: TRadioButton
+        Left = 24
+        Top = 80
+        Width = 57
+        Height = 17
+        Caption = 'Reverse'
+        TabOrder = 4
+      end
+    end
+    object IPAddress: TMemo
+      Left = 2996
+      Top = 61
+      Width = 134
+      Height = 22
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 23
+    end
+    object Reset: TButton
+      Left = 2726
+      Top = 40
+      Width = 75
+      Height = 25
+      Caption = 'Reset'
+      TabOrder = 24
+      OnClick = ResetClick
+    end
+    object LocoBlk: TEdit
+      Left = 3684
+      Top = 27
+      Width = 115
+      Height = 22
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Courier New'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 25
+    end
+    object TrackSpeed: TEdit
+      Left = 4114
+      Top = 26
+      Width = 56
+      Height = 21
+      TabOrder = 26
+    end
+    object SigSpeed: TEdit
+      Left = 4114
+      Top = 69
+      Width = 56
+      Height = 21
+      TabOrder = 27
+    end
+    object MonitorBtn: TButton
+      Left = 3948
+      Top = 27
+      Width = 84
+      Height = 22
+      Caption = 'Monitor On'
+      TabOrder = 28
+      OnClick = MonitorBtnClick
+    end
+    object ATCBtn: TButton
+      Left = 3949
+      Top = 55
+      Width = 65
+      Height = 22
+      Caption = 'ATC On'
+      TabOrder = 29
+      OnClick = ATCBtnClick
     end
   end
   object Tiles: TImageList
@@ -1074,7 +1139,6 @@ object RemoteDispatcher: TRemoteDispatcher
     Address = '192.168.2.0'
     ClientType = ctNonBlocking
     Port = 5304
-    OnConnect = ClientSocketConnect
     OnRead = ClientSocketRead
     Left = 272
     Top = 272

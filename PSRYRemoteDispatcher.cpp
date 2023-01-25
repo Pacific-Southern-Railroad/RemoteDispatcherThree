@@ -170,28 +170,28 @@ void __fastcall TRemoteDispatcher::FormActivate(TObject *Sender)
 	LocoList->Clear();
 
 	LocoDir = "For";
+
+//Origins for track diagrams to correct for offset of tile arrays
+
+	int HyYdPtDiaXOrigin = -20;
+	int	HyYdPtDiaYOrigin = 20;
+	int LaKrDiaXOrigin = 0;
+	int LaKrDiaYOrigin = 20;
+	int NaCfDiaXOrigin = 0;
+	int NaCfDiaYOrigin = 20;
+
+//Origins for USS panels
+
+	int	LaKrXOrigin = 46;
+	int	LaKrYOrigin = 514;
+	int	NaCfXOrigin = 113;
+	int	NaCfYOrigin = 514;
+
 	Connected = false;
 
 //End of constructor
 }
 //---------------------------------------------------------------------------
-
-//Origins for track diagrams to correct for offset of tile arrays
-
-int HyYdPtDiaXOrigin = -20;
-int	HyYdPtDiaYOrigin = 20;
-int LaKrDiaXOrigin = 0;
-int LaKrDiaYOrigin = 20;
-int NaCfDiaXOrigin = 0;
-int NaCfDiaYOrigin = 20;
-
-//Origins for USS panels
-
-int	LaKrXOrigin = 46;
-int	LaKrYOrigin = 514;
-int	NaCfXOrigin = 113;
-int	NaCfYOrigin = 514;
-
 //---------------------------------------------------------------------------
 
 void __fastcall TRemoteDispatcher::ClientSocketRead(TObject *Sender,
@@ -248,6 +248,7 @@ void __fastcall TRemoteDispatcher::ClientSocketRead(TObject *Sender,
 
 void __fastcall TRemoteDispatcher::FormClose(TObject *Sender, TCloseAction &Action)
 {
+	IPAddress->Lines->SaveToFile("../TextFiles/IP Address.txt");
 	DisconnectClick(this);
 }
 //---------------------------------------------------------------------------
@@ -298,14 +299,6 @@ void __fastcall TRemoteDispatcher::WatchdogTimer(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TRemoteDispatcher::ClientSocketConnect(TObject *Sender,
-	  TCustomWinSocket *Socket)
-{
-	Status->Text = "Connected";
-	Watchdog->Enabled = true;
-}
-//---------------------------------------------------------------------------
-
 void __fastcall TRemoteDispatcher::DisconnectClick(TObject *Sender)
 {
     Connected = false;
@@ -319,6 +312,7 @@ void __fastcall TRemoteDispatcher::DisconnectClick(TObject *Sender)
 void TRemoteDispatcher::LoadTile(String Name)      //Load tiles into image list
 {
 	Tiles->FileLoad(rtBitmap,("../Bitmaps/BlackScreenTiles\\" + Name), clWhite);
+
 }
 //---------------------------------------------------------------------------
 
@@ -329,6 +323,7 @@ void TRemoteDispatcher::LoadCabSignals(String Name)
 	CabSignals->FileLoad(rtBitmap,("../Bitmaps/BlackScreenTiles\\" + Name), clWhite);
 }
 //------------------------------------------------------------------------------
+
 
 //load USS machine images
 
@@ -351,7 +346,7 @@ void TRemoteDispatcher::LoadUSSLamps(String Name)
 
 //------------------------------------------------------------------------------
 
-//Process messages from dispatcher
+//Processing messages from dispatcher
 
 void TRemoteDispatcher::Process(String Message)
 {
@@ -479,8 +474,6 @@ void TRemoteDispatcher::Process(String Message)
 			Application->MessageBox(L"Block already assigned!", L"Pacific Southern", MB_OK);
 		else if(X == "LoAssgn")
 			Application->MessageBox(L"Loco already assigned!", L"Pacific Southern", MB_OK);
-		else if(X == "BlLoAsgn")
-			Application->MessageBox(L"Block and Loco already assigned!", L"Pacific Southern", MB_OK);
 	}
 
 	else if(Type == "ClrLst")                  //Loco list
@@ -511,15 +504,24 @@ void TRemoteDispatcher::Process(String Message)
 		StartStopBtn->Caption = Message.SubString(10, 10).TrimRight();
 	else if(Type == "HdltCap")
 		HeadlightBtn->Caption = Message.SubString(10, 25).TrimRight();
-	else if(Type == "ATCSpd")
-		SpeedBox->Text = Message.SubString(10, 10).TrimRight();
-	else if(Type == "ATCDir")
-		Direction->Text = Message.SubString(10, 10).TrimRight();
-
+	else if(Type == "TrkSpd")
+		TrackSpeed->Text = Message.SubString(10, 10).TrimRight(); //Selected loco
+	else if(Type == "SigSpd")
+		SigSpeed->Text = Message.SubString(10, 10).TrimRight();
+	else if(Type == "MonEn")
+		MonitorBtn->Enabled = StrToBool(M);
+	else if(Type == "ATCEn")
+		ATCBtn->Enabled = StrToBool(M);
+	else if(Type == "OffEn")
+        OffBtn->Enabled = StrToBool(M);
 	else if(Type == "DisCtrl")                      //control of Latham signals 4
 		DispatcherCtrl->Checked = StrToBool(M);
 	else if(Type == "PtCtrl")
 		PortCtrl->Checked = StrToBool(M);
+	else if(Type == "Sig4P")
+		PortCtrl->Enabled = StrToBool(M);
+	else if(Type == "Sig4D")
+		DispatcherCtrl->Enabled = StrToBool(M);
 
 	else if(Type == "NaAll")                        //Nassau control
 		rbNassau->Checked = StrToBool(M);
@@ -533,6 +535,7 @@ void TRemoteDispatcher::Process(String Message)
 		rbDispatcherAll->Enabled = StrToBool(M);
 	else if(Type == "NaAllEn")
 		rbDispatcherAll->Enabled = StrToBool(M);
+
 
 	else if(Type == "HyFltOn")                     //Hyde fleet
 		HydeFleetOn->Checked = StrToBool(M);
@@ -548,11 +551,11 @@ void TRemoteDispatcher::Process(String Message)
 		rbBankCliveden->Checked = StrToBool(M);
 	else if(Type == "DBaClCf")
 		DispatcherAll->Checked = StrToBool(M);
-	else if(Type == "CliffE")
+	else if(Type == "CfEn")
 		rbCliff->Enabled = StrToBool(M);
-	else if(Type == "DBaClE")
+	else if(Type == "BaClEn")
 		rbBankCliveden->Enabled = StrToBool(M);
-	else if(Type == "DBaClCfE")
+	else if(Type == "AllEn")
 		DispatcherAll->Enabled = StrToBool(M);
 
 	else if(Type == "C13AutoC")                   //Cliff auto routes
@@ -585,17 +588,20 @@ void TRemoteDispatcher::Process(String Message)
 		DSROn->Checked = StrToBool(M);
 	else if(Type == "DSROff")
 		DSROff->Checked = StrToBool(M);
-	else if(Type == "DSROnE")
-		DSROn->Enabled = StrToBool(M);
 	else if(Type == "H30Incl")
 		H30Incl->Checked = StrToBool(M);
+	else if(Type == "F11Incl")
+		F11Incl->Checked = StrToBool(M);
+	else if(Type == "P32Incl")
+		P32Incl->Checked = StrToBool(M);
+
 
 	else if(Type == "NaOn")
 		NaOn->Checked = StrToBool(M);
 	else if(Type == "NaOff")
 		NaOff->Checked = StrToBool(M);
 
-	else if(Type == "YYYY" && !Connected)  //Handshake with server
+	else if(Type == "YYYY" && !Connected)       //Handshake with server
 	{
 		Status->Text = "Server Busy";
         ClientSocket->Active = false;
@@ -606,6 +612,11 @@ void TRemoteDispatcher::Process(String Message)
 		Status->Text = "Connected";
 		Watchdog->Enabled = true;
 	}
+
+	else if(Type == "LocoBlk")             //LocoBlock list
+	{
+		LocoBlk->Text = Message.SubString(10, 26).Trim();
+    }
 }
 //---------------------------------------------------------------------------
 
@@ -621,13 +632,13 @@ void __fastcall TRemoteDispatcher::CycleTimerTimer(TObject *Sender)
 		CliffFleetOn->Visible = false;
 		CliffLabel->Visible = false;
 	}
-	if(rbBankCliveden->Checked)
+	if(rbBankCliveden->Checked && ImageNassauCliff->Visible)
 	{
 		rbC13Auto->Visible = true;
-		rbC31Auto->Visible = false;
+		rbC31Auto->Visible = true;
 		NormalBtn->Visible = true;
 	}
-	else if(DispatcherAll->Checked)
+	else if(DispatcherAll->Checked && ImageNassauCliff->Visible)
 	{
 		rbC13Auto->Visible = true;
 		rbC31Auto->Visible = true;
@@ -640,17 +651,33 @@ void __fastcall TRemoteDispatcher::CycleTimerTimer(TObject *Sender)
 		NormalBtn->Visible = false;
 	}
 
-	if(rbDispatcherAll->Checked || rbDispatcherMain->Checked)
+	if((rbDispatcherAll->Checked || rbDispatcherMain->Checked) && ImageNassauCliff->Visible)
 		NassauRoutes->Visible = true;
 	else
 	{
 		NassauRoutes->Visible = false;
 		NaOff->Checked = true;
 	}
+
+	if(DSROn->Checked)
+	{
+		H30Incl->Enabled = true;
+		F11Incl->Enabled = true;
+		P32Incl->Enabled = true;
+	}
+	else
+	{
+		H30Incl->Enabled = false;
+		F11Incl->Enabled = false;
+		P32Incl->Enabled = false;
+		H30Incl->Checked = false;
+		F11Incl->Checked = false;
+		P32Incl->Checked = false;
+	}
 }
 //---------------------------------------------------------------------------
 
-//Train ID
+//Train ID functions
 
 void __fastcall TRemoteDispatcher::TrainClick(TObject *Sender)
 {
@@ -658,8 +685,6 @@ void __fastcall TRemoteDispatcher::TrainClick(TObject *Sender)
 	Train->SetFocus();
 }
 //---------------------------------------------------------------------------
-
-//Responding to mouse
 
 void __fastcall TRemoteDispatcher::ImageHydeYardPortMouseDown(TObject *Sender,
 	  TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -688,6 +713,8 @@ void __fastcall TRemoteDispatcher::ImageHydeYardPortMouseDown(TObject *Sender,
 	}
 }
 //---------------------------------------------------------------------------
+
+//Responding to mouse
 
 void __fastcall TRemoteDispatcher::ImageLathamKrulishMouseDown(TObject *Sender,
 	  TMouseButton Button, TShiftState Shift, int X, int Y)
@@ -742,6 +769,7 @@ void __fastcall TRemoteDispatcher::ImageNassauCliffMouseDown(TObject *Sender,
 		WriteServer("rdRClk", "NaCf", X, Y, "");
 		Train->SetFocus();
 	}
+
 }
 //---------------------------------------------------------------------------
 
@@ -759,6 +787,7 @@ void TRemoteDispatcher::WriteServer(String Type, String ImageName, int Col, int 
 	ClientSocket->Socket->SendText(Message);
 }
 //---------------------------------------------------------------------------
+
 void TRemoteDispatcher::SetSignal()
 {
 	if(!PRRAspects)
@@ -815,23 +844,28 @@ void __fastcall TRemoteDispatcher::CabSignalClick(TObject *Sender)
 void __fastcall TRemoteDispatcher::ImageHydeYardPortMouseUp(TObject *Sender, TMouseButton Button,
 		  TShiftState Shift, int X, int Y)
 {
-	WriteServer("MouseUp", "", 0, 0, "");
+		WriteServer("MouseUp", "", 0, 0, "");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TRemoteDispatcher::ImageLathamKrulishMouseUp(TObject *Sender, TMouseButton Button,
 		  TShiftState Shift, int X, int Y)
 {
-	WriteServer("MouseUp", "", 0, 0, "");
+		WriteServer("MouseUp", "", 0, 0, "");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TRemoteDispatcher::ImageNassauCliffMouseUp(TObject *Sender, TMouseButton Button,
 		  TShiftState Shift, int X, int Y)
 {
-	WriteServer("MouseUp", "", 0, 0, "");
+		WriteServer("MouseUp", "", 0, 0, "");
 }
 //---------------------------------------------------------------------------
+
+//Screen swaps
+
+
+
 
 void __fastcall TRemoteDispatcher::LoadIDsClick(TObject *Sender)
 {
@@ -848,6 +882,7 @@ void __fastcall TRemoteDispatcher::ClearIDsClick(TObject *Sender)
 void __fastcall TRemoteDispatcher::SaveIDsClick(TObject *Sender)
 {
 	WriteServer("SaveIDs", "", 0, 0, "");
+
 }
 //---------------------------------------------------------------------------
 
@@ -881,9 +916,9 @@ void __fastcall TRemoteDispatcher::DeleteLocoClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TRemoteDispatcher::ATCOnClick(TObject *Sender)
+void __fastcall TRemoteDispatcher::OffBtnClick(TObject *Sender)
 {
-    WriteServer("ATCOn", "", 0, 0, "");
+	WriteServer("OffBtn", "", 0, 0, "");
 }
 //---------------------------------------------------------------------------
 
@@ -1132,14 +1167,43 @@ void __fastcall TRemoteDispatcher::DSROffClick(TObject *Sender)
 
 void __fastcall TRemoteDispatcher::NaOnClick(TObject *Sender)
 {
-	WriteServer("NaOn",BoolToStr(DSROn->Checked), 0, 0, "");
+	WriteServer("NaOn",BoolToStr(NaOn->Checked), 0, 0, "");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TRemoteDispatcher::NaOffClick(TObject *Sender)
 {
-	WriteServer("NaOff",BoolToStr(DSROn->Checked), 0, 0, "");
+	WriteServer("NaOff",BoolToStr(NaOff->Checked), 0, 0, "");
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TRemoteDispatcher::ResetClick(TObject *Sender)
+{
+	WriteServer("Reset", "", 0, 0, "");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRemoteDispatcher::MonitorBtnClick(TObject *Sender)
+{
+	WriteServer("MonOn", "", 0, 0, "");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRemoteDispatcher::ATCBtnClick(TObject *Sender)
+{
+	WriteServer("ATCOn", "", 0, 0, "");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRemoteDispatcher::F11InclClick(TObject *Sender)
+{
+	WriteServer("F11Incl",BoolToStr(F11Incl->Checked), 0, 0, "");
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TRemoteDispatcher::P32InclClick(TObject *Sender)
+{
+	WriteServer("P32Incl",BoolToStr(P32Incl->Checked), 0, 0, "");
+}
+//---------------------------------------------------------------------------
 

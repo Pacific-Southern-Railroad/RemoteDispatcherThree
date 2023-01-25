@@ -26,7 +26,7 @@ __published:	// IDE-managed Components
    TImage *ImageNassauCliff;
    TImageList *Tiles;
    TClientSocket *ClientSocket;
-   TPanel *Panel3;
+	TPanel *TopPanel;
 	TEdit *Status;
    TButton *Connect;
    TMemo *ReceiveBuffer;
@@ -62,19 +62,13 @@ __published:	// IDE-managed Components
 	TEdit *BlockID;
 	TButton *DeleteID;
 	TButton *DeleteLoco;
-	TButton *ATCOn;
-	TButton *OnList;
-	TButton *OffList;
+	TButton *OffBtn;
 	TImage *CabSignal;
 	TPanel *ATCControls;
 	TLabel *Label7;
 	TButton *StartStopBtn;
-	TButton *DirectionBtn;
-	TEdit *SpeedBox;
-	TEdit *Direction;
 	TButton *HeadlightBtn;
 	TButton *HornBtn;
-	TButton *ATCOffButton;
 	TPanel *LASigs4;
 	TRadioButton *DispatcherCtrl;
 	TRadioButton *PortCtrl;
@@ -119,13 +113,24 @@ __published:	// IDE-managed Components
 	TLabel *Label11;
 	TRadioButton *NaOn;
 	TRadioButton *NaOff;
+	TButton *Reset;
+	TEdit *LocoBlk;
+	TLabel *Label12;
+	TRadioButton *rbFor;
+	TRadioButton *rbRev;
+	TEdit *TrackSpeed;
+	TEdit *SigSpeed;
+	TLabel *Label13;
+	TLabel *Label14;
+	TButton *MonitorBtn;
+	TButton *ATCBtn;
+	TCheckBox *F11Incl;
+	TCheckBox *P32Incl;
    void __fastcall FormActivate(TObject *Sender);
    void __fastcall ClientSocketRead(TObject *Sender,
           TCustomWinSocket *Socket);
    void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
    void __fastcall ConnectClick(TObject *Sender);
-   void __fastcall ClientSocketConnect(TObject *Sender,
-          TCustomWinSocket *Socket);
    void __fastcall DisconnectClick(TObject *Sender);
    void __fastcall TrainClick(TObject *Sender);
    void __fastcall ImageHydeYardPortMouseDown(TObject *Sender,
@@ -150,7 +155,7 @@ __published:	// IDE-managed Components
 	void __fastcall TestBufferClick(TObject *Sender);
 	void __fastcall DeleteIDClick(TObject *Sender);
 	void __fastcall DeleteLocoClick(TObject *Sender);
-	void __fastcall ATCOnClick(TObject *Sender);
+	void __fastcall OffBtnClick(TObject *Sender);
 	void __fastcall OnListClick(TObject *Sender);
 	void __fastcall OffListClick(TObject *Sender);
 	void __fastcall cbActiveClick(TObject *Sender);
@@ -191,8 +196,13 @@ __published:	// IDE-managed Components
 	void __fastcall H30InclClick(TObject *Sender);
 	void __fastcall DSROnClick(TObject *Sender);
 	void __fastcall DSROffClick(TObject *Sender);
-	void __fastcall NaOffClick(TObject *Sender);
 	void __fastcall NaOnClick(TObject *Sender);
+	void __fastcall NaOffClick(TObject *Sender);
+	void __fastcall ResetClick(TObject *Sender);
+	void __fastcall MonitorBtnClick(TObject *Sender);
+	void __fastcall ATCBtnClick(TObject *Sender);
+	void __fastcall F11InclClick(TObject *Sender);
+	void __fastcall P32InclClick(TObject *Sender);
 
 
 
@@ -217,7 +227,7 @@ private:	// User declarations
 	bool PRRAspects;
 	TImage * pImage;
 	int Col, Row, Tile, USSTile, X, Y;
- //	int ButtonX, ButtonY;
+	int ButtonX, ButtonY;
 	int N, Errors;
 	bool WatchdogSet, NoInitialMessage;
 	int WatchdogDisconnects, ReconnectAttempts;

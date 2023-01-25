@@ -150,7 +150,7 @@
             <PCH>true</PCH>
         </PCHCompile>
         <CppCompile Include="PSRYRemoteDispatcher.cpp">
-            <Form>Form2</Form>
+            <Form>RemoteDispatcher</Form>
             <FormType>dfm</FormType>
             <DependentOn>PSRYRemoteDispatcher.h</DependentOn>
             <BuildOrder>2</BuildOrder>
